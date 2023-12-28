@@ -232,7 +232,7 @@ impl Env {
               loop {
                 let m = idx % 27;
                 let c = if m == 0 {
-                  '$'
+                  '_'
                 } else if m < 27 {
                   (0x60 + m as u8).try_into().unwrap()
                 } else {
