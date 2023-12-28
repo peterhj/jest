@@ -1,0 +1,13 @@
+[package]
+name = "jest"
+version = "0.1.0-devel"
+edition = "2018"
+authors = ["Peter Jin"]
+
+[dependencies]
+regex_syntax = { path = "../regex/regex-syntax" }
+smol_str = { path = "../smol_str", default-features = false }
+
+[[bin]]
+name = "mangle_js"
+path = "tools/mangle_js.rs"
