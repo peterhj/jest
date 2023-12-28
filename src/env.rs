@@ -390,7 +390,7 @@ impl Env {
       }
       Some(&Ident::Local(ref s)) |
       Some(&Ident::Fresh(ref s)) => {
-        match self.sub.get(&item) {
+        match self.sub.get(s.as_raw_str()) {
           Some(&x) => {
             match self.ident.get(&x) {
               Some(&Ident::Local(ref s)) |
