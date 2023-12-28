@@ -85,6 +85,7 @@ impl Default for Env {
     let _ = env.fresh_global("document");
     let _ = env.fresh_global("window");
     let _ = env.fresh_global("Event");
+    let _ = env.fresh_global("FormData");
     let _ = env.fresh_global("JSON");
     let _ = env.fresh_global("XMLHttpRequest");
     env
