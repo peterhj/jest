@@ -57,7 +57,8 @@ pub struct Env {
   stack: Vec<StackEntry>,
   ctr: i32,
   globl: BTreeMap<SmolStr, Num>,
-  sub: BTreeMap<Num, Num>,
+  //sub: BTreeMap<Num, Num>,
+  sub: BTreeMap<SmolStr, Num>,
   skip: usize,
   ident: BTreeMap<Num, Ident>,
   atom: BTreeMap<Num, Atom>,
@@ -221,7 +222,8 @@ impl Env {
       Some(Ident::Global(_)) => {}
       Some(Ident::Local(s)) |
       Some(Ident::Fresh(s)) => {
-        match self.sub.get(&item) {
+        //match self.sub.get(&item) {}
+        match self.sub.get(s.as_raw_str()) {
           None => {
             let x = self._fresh();
             loop {
@@ -250,7 +252,8 @@ impl Env {
               self.ident.insert(x, Ident::Local(nval.into()));
               break;
             }
-            self.sub.insert(item, x);
+            //self.sub.insert(item, x);
+            self.sub.insert(s.clone().into_raw(), x);
           }
           Some(_) => {}
         }
