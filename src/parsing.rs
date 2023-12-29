@@ -391,10 +391,14 @@ impl<I: Iterator<Item=char>> Iterator for Tokenizer_<I> {
       &mut Token::CommentNewline(ref mut s_) => {
         let mut s = String::new();
         loop {
-          let c = self.src.peek()?;
-          // FIXME: comment could end on eof.
+          // NB: comment could end on eof.
+          let c = match self.src.peek() {
+            None => {
+              break;
+            }
+            Some(c) => c
+          };
           if c == '\n' {
-            span.end = self.off as _;
             break;
           }
           let o = len_utf8(c as _);
@@ -402,6 +406,8 @@ impl<I: Iterator<Item=char>> Iterator for Tokenizer_<I> {
           assert_eq!(Some(c), self.src.next());
           self.off += o;
         }
+        span.end = self.off as _;
+        let _ = replace(s_, s.into());
       }
       _ => {}
     }
