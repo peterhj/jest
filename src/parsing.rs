@@ -293,7 +293,7 @@ pub fn tokenizer_trie() -> Rc<ReTrie<Token>> {
   tr.push(r"else",  |_| Token::Else);
   tr.push(r"return", |_| Token::Return);
   tr.push(r"var",   |_| Token::Var);
-  tr.push(r"[A-Za-z_][A-Za-z0-9_]*", |s| Token::Ident(s.into()));
+  tr.push(r"[A-Za-z_\$][A-Za-z0-9_\$]*", |s| Token::Ident(s.into()));
   tr.push(r"[0-9]+\.[0-9]+", |s| Token::try_float_from(s).unwrap());
   tr.push(r"[0-9]+", |s| Token::try_int_from(s).unwrap());
   tr.into()
