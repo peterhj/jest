@@ -410,7 +410,7 @@ impl Env {
     }
     match self.atom.get(&item) {
       Some(&Atom{ref val}) => {
-        return escape_str(val.as_raw_str()).into();
+        return escape_str(val.as_raw_str(), '\"').into();
       }
       _ => {}
     }

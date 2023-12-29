@@ -191,9 +191,9 @@ pub fn unescape_str<I: Iterator<Item=char>>(src: &mut I, delim: char) -> Result<
   }
 }
 
-pub fn escape_str(src: &str) -> String {
+pub fn escape_str(src: &str, delim: char) -> String {
   let mut dst = String::new();
-  dst.push_str("\"");
+  dst.push(delim);
 
   let mut start = 0;
 
@@ -250,6 +250,6 @@ pub fn escape_str(src: &str) -> String {
     dst.push_str(&src[start..]);
   }
 
-  dst.push_str("\"");
+  dst.push(delim);
   dst
 }
