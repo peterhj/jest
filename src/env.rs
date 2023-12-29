@@ -692,12 +692,15 @@ impl Env {
         let mut dst = String::new();
         for (k, &(cond, ref body)) in cases.iter().enumerate() {
           if k > 0 {
-            dst.push_str("else ");
+            dst.push_str("else");
           }
           if cond.is_nil() {
             /*assert!(k > 0);*/
             dst.push_str("{");
           } else {
+            if k > 0 {
+              dst.push_str(" ");
+            }
             dst.push_str("if(");
             dst.push_str(self._render(cond).as_raw_str());
             dst.push_str("){");
