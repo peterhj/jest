@@ -3,6 +3,7 @@ name = "jest"
 version = "0.1.0-devel"
 edition = "2018"
 authors = ["Peter Jin"]
+license = "MIT OR Apache-2.0"
 
 [dependencies]
 regex_syntax = { path = "../regex/regex-syntax" }
