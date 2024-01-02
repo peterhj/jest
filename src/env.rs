@@ -418,6 +418,9 @@ impl Env {
       Some(&Semiterm::Null) => {
         return "null".into();
       }
+      Some(&Semiterm::Undefined) => {
+        return "undefined".into();
+      }
       Some(&Semiterm::Bool(x)) => {
         return match x {
           false => "false",

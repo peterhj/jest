@@ -210,6 +210,7 @@ pub enum Token {
   LCurly,
   RCurly,
   Null,
+  Undefined,
   False,
   True,
   New,
@@ -284,6 +285,7 @@ pub fn tokenizer_trie() -> Rc<ReTrie<Token>> {
   tr.push(r"\{",    |_| Token::LCurly);
   tr.push(r"\}",    |_| Token::RCurly);
   tr.push(r"null",  |_| Token::Null);
+  tr.push(r"undefined", |_| Token::Undefined);
   tr.push(r"false", |_| Token::False);
   tr.push(r"true",  |_| Token::True);
   tr.push(r"new ",  |_| Token::New);
@@ -438,6 +440,7 @@ pub type SemistmtNum = Num;
 #[derive(Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Debug)]
 pub enum Semiterm {
   Null,
+  Undefined,
   Bool(bool),
   Int(i64),
   Float(i64, i64),
@@ -650,6 +653,11 @@ impl<Tokens: Iterator<Item=(CharSpan, Token)> + Clone> Parser_<Tokens> {
       Token::Null => {
         if self.trace { eprintln!("DEBUG:  Parser::term_nud: Null"); }
         let term = env.put_term(Semiterm::Null);
+        Ok(term)
+      }
+      Token::Undefined => {
+        if self.trace { eprintln!("DEBUG:  Parser::term_nud: Undefined"); }
+        let term = env.put_term(Semiterm::Undefined);
         Ok(term)
       }
       Token::False => {
